@@ -1,9 +1,8 @@
-@import url("https://unpkg.com/@tailwindcss/typography@0.2.x/dist/typography.min.css");
-@import url("https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css");
-@import url("https://fonts.googleapis.com/css?family=Tangerine");
+@import url('https://unpkg.com/@tailwindcss/typography@0.2.x/dist/typography.min.css');
+@import url('https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css');
 
 .cursive {
-  font-family: "Tangerine", cursive;
+  font-family: Helvetica, sans-serif;
   font-weight: 700;
 }
 
