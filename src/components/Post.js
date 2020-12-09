@@ -9,16 +9,16 @@ export default function Post() {
     sanityClient
       .fetch(
         `*[_type == "post"]{
-      title,
-      slug,
-      mainImage{
-        asset->{
-          _id,
-          url
-        },
-        alt
-      }
-    }`
+                title,
+                slug,
+                mainImage{
+                    asset->{
+                        _id,
+                        url
+                    },
+                    alt
+                }
+            }`
       )
       .then((data) => setPost(data))
       .catch(console.error);
@@ -35,7 +35,7 @@ export default function Post() {
           {postData &&
             postData.map((post, index) => (
               <article>
-                <Link to={`/post/${post.slug.current}`} key={post.slug.current}>
+                <Link to={'/post/' + post.slug.current} key={post.slug.current}>
                   <span
                     className="block h-64 relative rounded shadow leading-snug bg-white border-l-8 border-green-400"
                     key={index}
