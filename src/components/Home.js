@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import sanityClient from '../client.js';
-import { SocialIcon } from 'react-social-icons';
 import { FaBars, FaTimes, FaGithub, FaLinkedinIn, FaTwitter, FaReact } from 'react-icons/fa';
 
 export default function Home() {
@@ -33,7 +32,7 @@ export default function Home() {
               </span>
             </a>
           </div>
-          <div>
+          <div className="cursor-pointer">
             {!dropdown ? (
               <FaBars
                 className="text-xl inline-flex align-middle"
@@ -46,86 +45,34 @@ export default function Home() {
               />
             )}
           </div>
-          {/* <div className="text-gray-900 p-1 rounded-md md:hidden cursor-pointer">
-            <svg
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </div>
-          <ul className="items-center space-x-16 list-none text-sm hidden md:flex">
-            <a
-              href="#skills"
-              className="outline-none focus:outline-none text-gray-900 hover:text-blue-1000 transition duration-200 ease-in-out"
-            >
-              <li>Skills</li>
-            </a>
-            <a
-              href="#projects"
-              className="outline-none focus:outline-none text-gray-900 hover:text-blue-1000 transition duration-200 ease-in-out"
-            >
-              <li>Projects</li>
-            </a>
-            <a
-              href="#contact"
-              className="outline-none focus:outline-none text-gray-900 hover:text-blue-1000 transition duration-200 ease-in-out"
-            >
-              <li>Contact</li>
-            </a> */}
-          {/* <div>
-              <a href="https://github.com/TrevorSchwab">
-                <FaGithub className="h-8 w-8" />
-              </a>
-              <a href="https://www.linkedin.com/in/trevor-schwab-a811a7174/">
-                <FaLinkedinIn className="h-8 w-8" />
-              </a>
-              <a href="https://twitter.com/_trevorschwab">
-                <FaTwitter className="h-8 w-8" />
-              </a>
-            </div> */}
-          {/* </ul> */}
-          {/* <div className="flex py-3 px-3 my-6 col-start-4 col-end-6">
-            <a href="https://github.com/TrevorSchwab">
-              <FaGithub className="h-8 w-8" />
-            </a>
-            <a href="https://www.linkedin.com/in/trevor-schwab-a811a7174/">
-              <FaLinkedinIn className="h-8 w-8" />
-            </a>
-            <a href="https://twitter.com/_trevorschwab">
-              <FaTwitter className="h-8 w-8" />
-            </a>
-          </div> */}
         </div>
-      </nav>
-      {dropdown && (
-        <div className="h-12 flex pt-6 pb-6 flex-col items-center space-y-6 list-none text-sm lg:hidden">
-          <ul className="flex flex-col items-center justify-around">
-            <li>Skills</li>
-            <li>Projects</li>
-            <li>Contact</li>
-            <li>
+        {dropdown && (
+          <div className="h-12 mb-24 flex pt-6 pb-6 flex-col items-center space-y-6 list-none text-sm lg:hidden">
+            <ul className="flex flex-col items-center justify-around">
+              <a href="#skills">
+                <li className="text-3xl mb-4">Skills</li>
+              </a>
+              <a href="#projects">
+                <li className="text-3xl mb-4">Projects</li>
+              </a>
+              <a href="#contact">
+                <li className="text-3xl mb-4">Contact</li>
+              </a>
               <div className="flex">
                 <a href="https://github.com/TrevorSchwab">
                   <FaGithub className="h-8 w-8" />
                 </a>
                 <a href="https://www.linkedin.com/in/trevor-schwab-a811a7174/">
-                  <FaLinkedinIn className="h-8 w-8" />
+                  <FaLinkedinIn className="h-8 w-8 mx-8" />
                 </a>
                 <a href="https://twitter.com/_trevorschwab">
                   <FaTwitter className="h-8 w-8" />
                 </a>
               </div>
-            </li>
-          </ul>
-        </div>
-      )}
+            </ul>
+          </div>
+        )}
+      </nav>
       <div className="container mx-auto sm:px-4 md:px-8">
         <div className="px-6 lg:px-0 py-12 md:py-16 lg:py-24">
           <h3 className="font-semibold leading-relaxed text-3xl tracking-tight text-gray-900 mt-6 md:leading-relaxed text-4xl sm:leading-relaxed text-3xl mt-12 ">
@@ -173,7 +120,10 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-blue-50 px-6 lg:px-0 pt-16 pb-8 md:pt-20 md:pb-12 lg:pt-32 lg:pb-16">
+      <div
+        id="skills"
+        className="bg-blue-50 px-6 lg:px-0 pt-16 pb-8 md:pt-20 md:pb-12 lg:pt-32 lg:pb-16"
+      >
         <div className="container mx-auto sm:px-4 md:px-8">
           <div className="px-2">
             <div className="flex flex-col lg:flex-row -mx-2">
@@ -269,7 +219,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="px-6 lg:px-0 pt-16 pb-8 md:pt-20 md:pb-12 lg:pt-32 lg:pb-16">
+      <div id="projects" className="px-6 lg:px-0 pt-16 pb-8 md:pt-20 md:pb-12 lg:pt-32 lg:pb-16">
         <div className="text-gray-900 text-2xl md:text-3xl lg:text-4xl font-semibold mb-14">
           <h1
             style={{
@@ -313,6 +263,36 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="contact" className="px-6 lg:px-0 pt-16 pb-8 md:pt-20 md:pb-12 lg:pt-32 lg:pb-16">
+        <div className="text-gray-900 text-2xl md:text-3xl lg:text-4xl font-semibold mb-14">
+          <h1
+            style={{
+              width: '20%',
+              boxShadow: 'inset 0 -0.000002em 0 #fafafa, inset 0 -0.5em 0 #bcebf4',
+            }}
+          >
+            Contact
+          </h1>
+        </div>
+        <div className="px-2">Email me!</div>
+      </div>
+      <div id="contact" class="py-12 px-6 md:py-16 border-t mt-24 md:mt-32 lg:mt-48">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center text-gray-900 space-x-4 sm:space-x-5 md:space-x-10 lg:space-x-12">
+            <div className="flex w-full">
+              <a href="https://github.com/TrevorSchwab">
+                <FaGithub className="h-8 w-8 mr-4" />
+              </a>
+              <a href="https://www.linkedin.com/in/trevor-schwab-a811a7174/">
+                <FaLinkedinIn className="h-8 w-8 mr-4" />
+              </a>
+              <a href="https://twitter.com/_trevorschwab">
+                <FaTwitter className="h-8 w-8 mr-4" />
+              </a>
             </div>
           </div>
         </div>
