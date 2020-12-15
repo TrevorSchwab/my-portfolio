@@ -12,8 +12,9 @@ export default function Home() {
   const [author, setAuthor] = useState(null);
   const [company, setCompany] = useState(null);
   const [bio, setBio] = useState(null);
+  const [skills, setSkills] = useState(null);
   const [dropdown, setDropdown] = useState(false);
-  console.log(bio);
+  console.log(skills);
 
   useEffect(() => {
     sanityClient
@@ -52,6 +53,29 @@ export default function Home() {
       )
       .then((data) => setBio(data[0]))
       .catch(console.error);
+
+    sanityClient
+      .fetch(
+        `*[_type == "skills"]{
+            frontEndSkill1,
+            frontEndSkill2,
+            frontEndSkill3,
+            frontEndSkill4,
+            frontEndSkill5,
+            middleAndBackEndSkill1,
+            middleAndBackEndSkill2,
+            middleAndBackEndSkill3,
+            middleAndBackEndSkill4,
+            middleAndBackEndSkill5,
+            miscToolsSkill1,
+            miscToolsSkill2,
+            miscToolsSkill3,
+            miscToolsSkill4,
+            miscToolsSkill5,
+        }`
+      )
+      .then((data) => setSkills(data[0]))
+      .catch(console.error);
   }, []);
 
   const scrollTo = () => {
@@ -60,7 +84,8 @@ export default function Home() {
     });
   };
 
-  if (!author || !company || !bio) return <div>Loading...</div>;
+  if (!author || !company || !bio || !skills) return <div>Loading...</div>;
+
   return (
     <main className="min-h-screen container mx-auto sm:px-4 md:px-8">
       <nav class="py-3 lg:py-6 px-3 md:px-0">
@@ -208,11 +233,11 @@ export default function Home() {
                       </h3>
                     </div>
                     <ul class="list-none space-y-6 mt-6 text-sm sm:text-base px-2">
-                      <li>JavaScript</li>
-                      <li>React</li>
-                      <li>React Native</li>
-                      <li>HTML</li>
-                      <li>CSS</li>
+                      <li>{skills.frontEndSkill1}</li>
+                      <li>{skills.frontEndSkill2}</li>
+                      <li>{skills.frontEndSkill3}</li>
+                      <li>{skills.frontEndSkill4}</li>
+                      <li>{skills.frontEndSkill5}</li>
                     </ul>
                   </div>
                   <div class="flex-1 px-2 border-b md:border-0 py-8">
@@ -237,11 +262,11 @@ export default function Home() {
                       </h3>
                     </div>
                     <ul class="list-none space-y-6 mt-6 text-sm sm:text-base px-2">
-                      <li>REST</li>
-                      <li>GraphQL - Apollo</li>
-                      <li>Node</li>
-                      <li>Express</li>
-                      <li>Hapi</li>
+                      <li>{skills.middleAndBackEndSkill1}</li>
+                      <li>{skills.middleAndBackEndSkill2}</li>
+                      <li>{skills.middleAndBackEndSkill3}</li>
+                      <li>{skills.middleAndBackEndSkill4}</li>
+                      <li>{skills.middleAndBackEndSkill5}</li>
                     </ul>
                   </div>
                   <div class="flex-1 px-2 border-b md:border-0 py-8">
@@ -253,11 +278,11 @@ export default function Home() {
                       </h3>
                     </div>
                     <ul class="list-none space-y-6 mt-6 text-sm sm:text-base px-2">
-                      <li>TypeScript</li>
-                      <li>Redux</li>
-                      <li>Git</li>
-                      <li>Firebase</li>
-                      <li>MongoDB</li>
+                      <li>{skills.miscToolsSkill1}</li>
+                      <li>{skills.miscToolsSkill2}</li>
+                      <li>{skills.miscToolsSkill3}</li>
+                      <li>{skills.miscToolsSkill4}</li>
+                      <li>{skills.miscToolsSkill5}</li>
                     </ul>
                   </div>
                 </div>

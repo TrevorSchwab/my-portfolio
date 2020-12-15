@@ -4,24 +4,8 @@ export default {
   type: 'document',
   fields: [
     {
-      name: 'title',
-      type: 'string',
-    },
-    {
-      name: 'date',
-      type: 'datetime',
-    },
-    {
-      name: 'place',
-      type: 'string',
-    },
-    {
-      name: 'description',
-      type: 'text',
-    },
-    {
-      name: 'projectType',
-      title: 'Project type',
+      name: 'frontEnd',
+      title: 'Front end',
       type: 'string',
       options: {
         list: [
@@ -32,19 +16,27 @@ export default {
       },
     },
     {
-      name: 'link',
-      type: 'url',
+      name: 'middleAndBackEnd',
+      title: 'Middle and back end',
+      type: 'string',
+      options: {
+        list: [
+          { value: 'personal', title: 'Personal' },
+          { value: 'client', title: 'Client' },
+          { value: 'school', title: 'School' },
+        ],
+      },
     },
     {
-      name: 'tags',
-      type: 'array',
-      of: [
-        {
-          type: 'string',
-        },
-      ],
+      name: 'miscTools',
+      title: 'Misc tools',
+      type: 'string',
       options: {
-        layout: 'tags',
+        list: [
+          { value: 'personal', title: 'Personal' },
+          { value: 'client', title: 'Client' },
+          { value: 'school', title: 'School' },
+        ],
       },
     },
   ],
