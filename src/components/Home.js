@@ -10,8 +10,10 @@ function urlFor(source) {
 
 export default function Home() {
   const [author, setAuthor] = useState(null);
+  const [company, setCompany] = useState(null);
+  const [bio, setBio] = useState(null);
   const [dropdown, setDropdown] = useState(false);
-  console.log(author);
+  console.log(bio);
 
   useEffect(() => {
     sanityClient
@@ -24,6 +26,32 @@ export default function Home() {
       )
       .then((data) => setAuthor(data[0]))
       .catch(console.error);
+
+    sanityClient
+      .fetch(
+        `*[_type == "company"]{
+            companyLogo,
+            stackImage1,
+            stackImage2,
+            stackImage3,
+            githubLogo,
+            "companyDescription": companyDescription[0].children[0].text
+        }`
+      )
+      .then((data) => setCompany(data[0]))
+      .catch(console.error);
+
+    sanityClient
+      .fetch(
+        `*[_type == "bio"]{
+            bioImage,
+            bioBlurb,
+            "resume": resume.asset->url,
+            workStatus,
+        }`
+      )
+      .then((data) => setBio(data[0]))
+      .catch(console.error);
   }, []);
 
   const scrollTo = () => {
@@ -32,9 +60,9 @@ export default function Home() {
     });
   };
 
-  if (!author) return <div>Loading...</div>;
+  if (!author || !company || !bio) return <div>Loading...</div>;
   return (
-    <main>
+    <main className="min-h-screen container mx-auto sm:px-4 md:px-8">
       <nav class="py-3 lg:py-6 px-3 md:px-0">
         <div className="flex justify-between">
           <div class="h-10 w-10 md:h-12 md:w-12 flex items-center col-start-1 col-span-1">
@@ -90,13 +118,17 @@ export default function Home() {
       </nav>
       <div className="container mx-auto sm:px-4 md:px-8">
         <div className="px-6 lg:px-0 py-12 md:py-16 lg:py-24">
+          <img
+            src={urlFor(bio.bioImage).url()}
+            alt="Trevor Schwab"
+            className="h-40 md:h-48 lg:h-56"
+          />
           <h3 className="font-semibold leading-relaxed text-3xl tracking-tight text-gray-900 mt-6 md:leading-relaxed text-4xl sm:leading-relaxed text-3xl mt-12 ">
-            {' '}
-            Hello, my name is Trevor. I am a front-end web developer living in Denver, CO.
+            {bio.bioBlurb}
           </h3>
           <div className="flex flex-col sm:flex-row sm:items-center mt-6 sm:space-x-12 text-sm sm:text-base">
             <a
-              href="/"
+              href={`${bio.resume}?dl=`}
               className="flex items-center font-medium text-gray-900 hover:text-blue-1000 transition duration-300 ease-in-out mb-4 sm:mb-0 outline-none focus:outline-none"
             >
               Resume{' '}
@@ -275,7 +307,55 @@ export default function Home() {
                     </div>
                     <div className="flex items-center">
                       <a href="https://github.com/aw33598/Folor" target="_blank">
-                        <FaGithub className="h-9 w-9" />
+                        <img
+                          src={urlFor(company.githubLogo).url()}
+                          alt="Github"
+                          className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-center mt-4 md:mt-5 lg:mt-6">
+                    <p className="text-sm sm:text-base">{company.companyDescription}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
+            <div>
+              <div className="shadow rounded-md p-4 md:p-5 lg:p-6 h-full border border-gray-200">
+                <div className="flex flex-col h-full">
+                  <div className="flex items-center justify-between">
+                    <div className="flex">
+                      <img
+                        src={urlFor(company.companyLogo).url()}
+                        alt="Bite Pay"
+                        className="h-12 w-12 mr-3 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                      />
+                      <img
+                        src={urlFor(company.stackImage1).url()}
+                        alt="ReactJS"
+                        className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                      />
+                      <img
+                        src={urlFor(company.stackImage2).url()}
+                        alt="NodeJS"
+                        className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                      />
+                      <img
+                        src={urlFor(company.stackImage3).url()}
+                        alt="Firebase"
+                        className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                      />
+                    </div>
+                    <div className="flex items-center">
+                      <a href="https://github.com/aw33598/Folor" target="_blank">
+                        <img
+                          src={urlFor(company.githubLogo).url()}
+                          alt="Github"
+                          className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                        />
                       </a>
                     </div>
                   </div>
