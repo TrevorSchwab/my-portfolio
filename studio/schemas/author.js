@@ -18,7 +18,31 @@ export default {
       },
     },
     {
-      name: 'image',
+      name: 'companyImage',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: 'image1',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: 'image2',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: 'image3',
       title: 'Image',
       type: 'image',
       options: {
@@ -33,7 +57,7 @@ export default {
         {
           title: 'Block',
           type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
+          styles: [{ title: 'Normal', value: 'normal' }],
           lists: [],
         },
       ],
@@ -45,4 +69,4 @@ export default {
       media: 'image',
     },
   },
-}
+};

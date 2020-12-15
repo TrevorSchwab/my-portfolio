@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import sanityClient from '../client.js';
 import { FaBars, FaTimes, FaGithub, FaLinkedinIn, FaTwitter, FaReact } from 'react-icons/fa';
+import imageUrlBuilder from '@sanity/image-url';
+
+const builder = imageUrlBuilder(sanityClient);
+function urlFor(source) {
+  return builder.image(source);
+}
 
 export default function Home() {
   const [author, setAuthor] = useState(null);
   const [dropdown, setDropdown] = useState(false);
-  console.log(dropdown);
+  console.log(author);
 
   useEffect(() => {
     sanityClient
@@ -13,14 +19,20 @@ export default function Home() {
         `*[_type == "author"]{
             name,
             "bio": bio[0].children[0].text,
-            "authorImage": image.asset->url
+            "authorImage": companyImage, image1, image2, image3
         }`
       )
       .then((data) => setAuthor(data[0]))
       .catch(console.error);
   }, []);
 
-  // if (!author) return <div>Loading...</div>;
+  const scrollTo = () => {
+    document.querySelector('#skills').scrollIntoView({
+      behavior: 'smooth',
+    });
+  };
+
+  if (!author) return <div>Loading...</div>;
   return (
     <main>
       <nav class="py-3 lg:py-6 px-3 md:px-0">
@@ -49,8 +61,11 @@ export default function Home() {
         {dropdown && (
           <div className="h-12 mb-24 flex pt-6 pb-6 flex-col items-center space-y-6 list-none text-sm lg:hidden">
             <ul className="flex flex-col items-center justify-around">
-              <a href="#skills">
+              <a href="#skills" onClick={scrollTo}>
                 <li className="text-3xl mb-4">Skills</li>
+              </a>
+              <a href="#projects">
+                <li className="text-3xl mb-4">Companies</li>
               </a>
               <a href="#projects">
                 <li className="text-3xl mb-4">Projects</li>
@@ -132,7 +147,7 @@ export default function Home() {
                   <h1
                     style={{
                       width: '12%',
-                      boxShadow: 'inset 0 -0.000002em 0 #fafafa, inset 0 -0.5em 0 #cde19f',
+                      boxShadow: 'inset 0 -0.000002em 0 #fafafa, inset 0 -0.5em 0 #fbe5a2',
                     }}
                   >
                     Skills
@@ -227,6 +242,63 @@ export default function Home() {
               boxShadow: 'inset 0 -0.000002em 0 #fafafa, inset 0 -0.5em 0 #faaf98',
             }}
           >
+            Companies
+          </h1>
+        </div>
+        <div className="px-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
+            <div>
+              <div className="shadow rounded-md p-4 md:p-5 lg:p-6 h-full border border-gray-200">
+                <div className="flex flex-col h-full">
+                  <div className="flex items-center justify-between">
+                    <div className="flex">
+                      <img
+                        src={urlFor(author.authorImage).url()}
+                        alt="Bite Pay"
+                        className="h-12 w-12 mr-3 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                      />
+                      <img
+                        src={urlFor(author.image1).url()}
+                        alt="ReactJS"
+                        className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                      />
+                      <img
+                        src={urlFor(author.image2).url()}
+                        alt="NodeJS"
+                        className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                      />
+                      <img
+                        src={urlFor(author.image3).url()}
+                        alt="Firebase"
+                        className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                      />
+                    </div>
+                    <div className="flex items-center">
+                      <a href="https://github.com/aw33598/Folor" target="_blank">
+                        <FaGithub className="h-9 w-9" />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-center mt-4 md:mt-5 lg:mt-6">
+                    <p className="text-sm sm:text-base">
+                      {' '}
+                      React Native App for restaurant bill splitting and payment{' '}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="projects" className="px-6 lg:px-0 pt-16 pb-8 md:pt-20 md:pb-12 lg:pt-32 lg:pb-16">
+        <div className="text-gray-900 text-2xl md:text-3xl lg:text-4xl font-semibold mb-14">
+          <h1
+            style={{
+              width: '20%',
+              boxShadow: 'inset 0 -0.000002em 0 #fafafa, inset 0 -0.5em 0 #cde19f',
+            }}
+          >
             Projects
           </h1>
         </div>
@@ -236,22 +308,26 @@ export default function Home() {
               <div className="shadow rounded-md p-4 md:p-5 lg:p-6 h-full border border-gray-200">
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <FaReact className="text-xl" />
+                    <div className="flex">
                       <img
-                        src="/img/webpack-icon.1310ad87.svg"
-                        alt="Webpack"
-                        className="h-6 w-6 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                        src={urlFor(author.image1).url()}
+                        alt="ReactJS"
+                        className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
                       />
                       <img
-                        src="/img/sass.8e766e95.svg"
-                        alt="Sass"
-                        className="h-6 w-6 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                        src={urlFor(author.image2).url()}
+                        alt="NodeJS"
+                        className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
+                      />
+                      <img
+                        src={urlFor(author.image3).url()}
+                        alt="Firebase"
+                        className="h-12 w-12 sm:h-7 sm:w-7 ml-1 md:ml-2"
                       />
                     </div>
                     <div className="flex items-center">
                       <a href="https://github.com/aw33598/Folor" target="_blank">
-                        <FaGithub className="text-xl" />
+                        <FaGithub className="h-9 w-9" />
                       </a>
                     </div>
                   </div>
@@ -272,7 +348,7 @@ export default function Home() {
           <h1
             style={{
               width: '20%',
-              boxShadow: 'inset 0 -0.000002em 0 #fafafa, inset 0 -0.5em 0 #bcebf4',
+              boxShadow: 'inset 0 -0.000002em 0 #fafafa, inset 0 -0.5em 0 #feb36c',
             }}
           >
             Contact
